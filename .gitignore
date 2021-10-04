@@ -1,4 +1,4 @@
-*.data
-*.data_hires
-*.mosaic
-*.html
+data/**
+data_hires/**
+mosaic/**
+html/**
