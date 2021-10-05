@@ -1,0 +1,7 @@
+defaultImg = imread('data/00153v.jpg');
+% given channel order is BGR
+B = imcrop(defaultImg, [0, 0, 394, 1024/3]);
+G = imcrop(defaultImg, [0, 394, 394, 1024/3-50])
+R = imcrop(defaultImg, [0, 1024*2/3, 394, 1024/3]); 
+
+imshow(R);
