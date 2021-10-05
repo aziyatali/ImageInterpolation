@@ -1,25 +1,15 @@
 clear
 clc
 
-A = imread('mosaic/crayons_mosaic.bmp');
-R = A;
-G = A;
-B = A;
+A = im2double(imread('mosaic/crayons_mosaic.bmp'));
+rA = [1,0,0,0];
+gA = [0,1,1,0];
+bA = [0,0,0,1];
 
-R(:,:,2) = 0;
-R(:,:,3)= 0;
-subplot(2,2,1);
-imshow(R);
-title('Red channel only');
+redChannel = A.*repmat(double(rA), size(A)/2,1);
+greenChannel = A.*repmat(double(gA), size(A)/2,1);
+blueChannel = A.*repmat(double(bA), size(A)/2,1);
 
-G(:,:, 1) = 0;
-G(:, :, 3) = 0;
-subplot(2,2,2);
-imshow(G);
-title('Green channel only');
+X = [1 1 1; 1 1 1; 1 1 1]./(3*3);
 
-B(:, :, 1) = 0;
-B(:,:,2) = 0;
-subplot(2,2,3);
-imshow(B);
-title('Blue channel only');
+imshow(redChannel);

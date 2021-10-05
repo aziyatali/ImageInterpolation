@@ -1,26 +1,10 @@
 clear
 clc
 
-I = imread('mosaic/crayons_mosaic.bmp');
-R = A;
-G = A;
-B = A;
+A = imread('mosaic/crayons_mosaic.bmp');
+R = 
+X = [1 1 1; 1 1 1; 1 1 1]./(3*3);
 
-[x,y,z] = size(A);
-R(:,:,2) = 0;
-R(:,:,3)= 0;
-subplot(2,2,1);
-imshow(R);
-title('Red channel only');
+rgbImage = conv2(A, X);
 
-G(:,:, 1) = 0;
-G(:, :, 3) = 0;
-subplot(2,2,2);
-imshow(G);
-title('Green channel only');
-
-B(:, :, 1) = 0;
-B(:,:,2) = 0;
-subplot(2,2,3);
-imshow(B);
-title('Blue channel only');
+imshow(rgbImage);
