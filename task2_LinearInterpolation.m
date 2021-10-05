@@ -14,12 +14,26 @@ redChannel = A.*repmat(rA, 240, 300);
 greenChannel = A.*repmat(gA, 240, 300);
 blueChannel = A.*repmat(bA, 240, 300);
 
-% for interpolation I am taking 3x3 matrix divided by 9
-X = [1 1 1; 1 1 1; 1 1 1]./(3*3);
+% for interpolation I am taking 3x3 matrix divided by 4
+% when we align RGGB sensor according to image size it becomes like repmat(rA, 240, 300);
+% 1 0 1 0 10 till the row size of an image
+% 0 0 0 0 
+% 1 0 1 0
+% till the size of column image
+% if we take initial 3X3 then it becomes filter for R
+% it applies same for R and B and for G I will take opposite values of R+B
+rR = [1 0 1; 0 0 0; 1 0 1]./(4);
+rG = [0,1,0; 1,0,1; 0,1,0]./(4);
+rB = [0,0,0; 0,1,0; 0,0,0]./(4);
+
 % using filter2 function, we multiply with X
-R = filter2(X, redChannel);
-G = filter2(X, greenChannel);
-B = filter2(X, blueChannel);
+R = redChannel + filter2(rR, redChannel);
+G = greenChannel + filter2(rG, greenChannel);
+B = blueChannel + filter2(rB, blueChannel);
 % we align R, G, B into one image with cat function
 rgbImage = cat(3, R, G, B);
+
+% saving the task2 image for task3 case
+imwrite(rgbImage, 'task2Image.jpg');
+%output the image
 imshow(rgbImage);

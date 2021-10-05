@@ -1,0 +1,15 @@
+% reading original image and image I got from task2
+orgImg = im2double(imread('mosaic/crayons.jpg'));
+task2Image = im2double(imread('mosaic/output_Task2.jpg'));
+
+% spliting original image and task2 image into three channels 
+[oR, oG, oB] = imsplit(orgImg);
+[cR, cG, cB] = imsplit(task2Image);
+
+% calculating the difference by subtracting each channels of task2 image from channels of original image
+dR = sqroot((squ(oR) - square(cR)));
+dG = sqroot(square(oG) - square(cG));
+dB = sqroot(square(oB) - square(cB));
+
+dRGB = cat(3, dR, dG, dB);
+imshow(dRGB);
